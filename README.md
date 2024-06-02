@@ -2,7 +2,7 @@
 A package for visualizing [ADMIXTURE](https://dalexander.github.io/admixture/) and [smartPCA](https://github.com/DReichLab/EIG) outputs. <br />
 
 ### ADMIXTURE
-Unzip the repository and place "gplotter-admixture.py" in the same directory as your fam and Q files. This script will create two files, "<prefix>.csv" and "<prefix>.pdf" which will the Q estimates dataframe and a pdf of the bar plots. <br />
+Unzip the repository and place "gplotter-admixture.py" in the same directory as your fam and Q files. This script will create two files which will be the Q estimates dataframe (df_csv) and a pdf of the bar plots (out_pdf). <br />
 
 To do a dry run, you can use the input files provided in data directory of this repository to get bar plots of a supervised ADMIXTURE analysis.
 ``` r
