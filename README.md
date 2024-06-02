@@ -1,5 +1,5 @@
 ﻿# gplotter
-A package for plotting [ADMIXTURE](https://dalexander.github.io/admixture/) and [smartPCA](https://github.com/DReichLab/EIG) outputs. <br />
+A package for visualizing [ADMIXTURE](https://dalexander.github.io/admixture/) and [smartPCA](https://github.com/DReichLab/EIG) outputs. <br />
 
 ### ADMIXTURE
 Unzip the repository and place "gplotter-admixture.py" in the same directory as your fam and Q files. This script will create two files, "<prefix>.csv" and "<prefix>.pdf" which will the Q estimates dataframe and a pdf of the bar plots. <br />
@@ -10,7 +10,7 @@ python gplotter-admixture.py --fam admixture.fam -Q admixture.3s.Q --df_csv test
 ```
 
 ### smartPCA
-Place "gplotter-PCA.R" in the same directory as your evec and poplist files (the file containing the population labels used to calculate the principle components of the PCA). <br />
+Place "gplotter-PCA.R" in the same directory as your evec and poplist files (the file containing the population labels used to calculate the principle components of the PCA). Open the R script and replace "example.evec" and "poplist.txt" with your own file prefixes. <br />
 
 An example of how to create PCA plots:
 ``` r
