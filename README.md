@@ -1,5 +1,5 @@
 ﻿# gplotter
-A package for plotting [ADMIXTURE]([https://www.cog-genomics.org/plink/](https://dalexander.github.io/admixture/) and [smartPCA](https://github.com/DReichLab/EIG) outputs. <br />
+A package for plotting [ADMIXTURE](https://dalexander.github.io/admixture/) and [smartPCA](https://github.com/DReichLab/EIG) outputs. <br />
 
 ### ADMIXTURE
 Unzip the repository and place "gplotter-admixture.py" in the same directory as your fam and Q files. This script will create two files, "<prefix>.csv" and "<prefix>.pdf" which will the Q estimates dataframe and a pdf of the bar plots. <br />
