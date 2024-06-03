@@ -6,7 +6,7 @@ Unzip the repository and place "gplotter-admixture.py" in the same directory as 
 
 To do a dry run, you can use the input files provided in data directory of this repository to get bar plots of a supervised ADMIXTURE analysis. Font size of a Pop_label can be changed by changing the value of "fontsize" in the script manually.  
 ``` r
-python gplotter-admixture.py --fam admixture.fam -Q admixture.3s.Q --df_csv test.csv --out_pdf test.pdf
+python gplotter-admixture.py --fam admixture.fam --Q admixture.3s.Q --df_csv test.csv --out_pdf test.pdf
 ```
 
 ### smartPCA
