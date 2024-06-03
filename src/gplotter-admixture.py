@@ -76,15 +76,9 @@ for pop_label in pop_labels:
 # Adjust plot margins to make space for the labels
 plt.subplots_adjust(bottom=0.2)
 
-# Calculate the width of a single bar
-bar_width = 1 / len(sample_ids)
-
-# Calculate the fontsize to match the bar width
-fontsize = bar_width * ax.get_figure().get_figwidth() * 72  # Convert from inches to points
-
 # Place population labels below the first bar of the sample ID for each pop label
 for pop_label, first_index in pop_label_positions.items():
-    ax.text(first_index + bar_width / 2, -0.05, pop_label, ha='center', va='top', fontsize=fontsize, rotation=90, transform=ax.get_xaxis_transform())
+    ax.text(first_index, -0.05, pop_label, ha='center', va='top', fontsize=4, rotation=90, transform=ax.get_xaxis_transform())
 
 # Save the plot
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
