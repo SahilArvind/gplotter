@@ -4,7 +4,7 @@ A package for visualizing [ADMIXTURE](https://dalexander.github.io/admixture/) a
 ### ADMIXTURE
 Unzip the repository and place "gplotter-admixture.py" in the same directory as your fam and Q files. This script will create two files which will be the Q estimates dataframe (df_csv) and a pdf of the bar plots (out_pdf). <br />
 
-To do a dry run, you can use the input files provided in data directory of this repository to get bar plots of a supervised ADMIXTURE analysis.
+To do a dry run, you can use the input files provided in data directory of this repository to get bar plots of a supervised ADMIXTURE analysis. Font size of a Pop_label can be changed by changing the value of "fontsize" in the script manually.  
 ``` r
 python gplotter-admixture.py --fam admixture.fam -Q admixture.3s.Q --df_csv test.csv --out_pdf test.pdf
 ```
