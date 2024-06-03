@@ -63,19 +63,22 @@ ax.set_xticks([])
 ax.set_xlabel('')
 ax.legend(bbox_to_anchor=(1, 1), fontsize='medium', labelspacing=0.5, frameon=False)
 
+# Ensure that df_q is sorted based on the order of df_fam
+df_fam_sorted = df_fam.set_index(1).loc[df_q.index].reset_index()
+
 # Calculate the position for each population label
-pop_labels = df_fam[0].unique()
+pop_labels = df_fam_sorted[0].unique()
 pop_label_positions = {}
 for pop_label in pop_labels:
-    sample_ids = df_fam[df_fam[0] == pop_label][1].tolist()
-    start = df_q.index.get_loc(sample_ids[0])
-    end = df_q.index.get_loc(sample_ids[-1])
-    center = start + (end - start) / 2
-    pop_label_positions[pop_label] = center
+    first_index = df_fam_sorted[df_fam_sorted[0] == pop_label].index[0]
+    pop_label_positions[pop_label] = first_index
 
-# Place population labels below the center of each group of bars with the same pop labels
-for pop_label, center in pop_label_positions.items():
-    ax.text(center, -0.05, pop_label, ha='center', va='center', fontsize='small')
+# Adjust plot margins to make space for the labels
+plt.subplots_adjust(bottom=0.2)
+
+# Place population labels below the first bar of the sample ID for each pop label
+for pop_label, first_index in pop_label_positions.items():
+    ax.text(first_index, -0.05, pop_label, ha='center', va='top', fontsize='small', rotation=90, transform=ax.get_xaxis_transform())
 
 # Save the plot
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
