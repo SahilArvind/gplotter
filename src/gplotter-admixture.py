@@ -12,10 +12,10 @@ parser.add_argument('--out_pdf', type=str, help='Output PDF file name.')
 args = parser.parse_args()
 
 # Read in fam file as dataframe
-df_fam = pd.read_csv(args.fam, sep='\t', header=None)
+df_fam = pd.read_csv(args.fam, delim_whitespace=True, header=None)
 
 # Read in the Q file, which is also whitespace delimited
-df_q = pd.read_csv(args.Q, sep=' ', header=None)
+df_q = pd.read_csv(args.Q, delim_whitespace=True, header=None)
 
 # Sample IDs are in the second column of the fam file
 sample_ids = df_fam[1].tolist()
@@ -48,12 +48,12 @@ pal = sns.color_palette(['#ef8a62', '#92c5de', '#fddbc7', '#0571b0'])
 
 # Create the stacked bar plot
 ax = df_q.plot.bar(stacked=True,
-                    figsize=(25, 5),
-                    width=1,
-                    color=pal,
-                    fontsize='x-small',
-                    edgecolor='black',
-                    linewidth=0.5)
+                   figsize=(25, 5),
+                   width=1,
+                   color=pal,
+                   fontsize='x-small',
+                   edgecolor='black',
+                   linewidth=0.5)
 
 # Clean up the plot
 ax.spines['top'].set_visible(False)
@@ -66,7 +66,7 @@ ax.legend(bbox_to_anchor=(1, 1), fontsize='medium', labelspacing=0.5, frameon=Fa
 # Calculate the position for each population label
 pop_labels = df_fam[0].unique()
 pop_label_positions = {}
-for i, pop_label in enumerate(pop_labels):
+for pop_label in pop_labels:
     sample_ids = df_fam[df_fam[0] == pop_label][1].tolist()
     start = df_q.index.get_loc(sample_ids[0])
     end = df_q.index.get_loc(sample_ids[-1])
