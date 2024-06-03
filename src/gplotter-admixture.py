@@ -44,7 +44,7 @@ else:
     df_q['assignment'] = df_q.drop(['Pop_Label'], axis=1).idxmax(axis=1)
 
 # Set the color palette
-pal = sns.color_palette(['#ef8a62', '#92c5de', '#fddbc7', '#0571b0'])
+pal = sns.color_palette(['#ef8a62', '#92c5de', '#fddbc7', '#0571b0', '#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850', '#a6bddb', '#3690c0', '#02818a', '#016c59', '#8c510a'])
 
 # Create the stacked bar plot
 ax = df_q.plot.bar(stacked=True,
@@ -78,7 +78,7 @@ plt.subplots_adjust(bottom=0.2)
 
 # Place population labels below the first bar of the sample ID for each pop label
 for pop_label, first_index in pop_label_positions.items():
-    ax.text(first_index, -0.05, pop_label, ha='center', va='top', fontsize=4, rotation=90, transform=ax.get_xaxis_transform())
+    ax.text(first_index, -0.05, pop_label, ha='center', va='top', fontsize=8, rotation=90, transform=ax.get_xaxis_transform())
 
 # Save the plot
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
