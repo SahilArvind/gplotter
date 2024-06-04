@@ -79,7 +79,7 @@ for pop_label in pop_labels:
     pop_label_boundaries.append(indices[-1] + 0.5)
 
 # Adjust plot margins to make space for the labels
-plt.subplots_adjust(bottom=0.2, top=0.85)
+plt.subplots_adjust(bottom=0.2)
 
 # Place population labels below the center of the group of bars for each pop label
 for pop_label, center_index in pop_label_positions.items():
@@ -87,11 +87,14 @@ for pop_label, center_index in pop_label_positions.items():
 
 # Add black lines between different population labels
 for boundary in pop_label_boundaries:
-    ax.axvline(x=boundary, color='black', linewidth=0.5)
+    ax.vlines(x=boundary, ymin=0, ymax=1, color='black', linewidth=0.5)
 
-# Add the maximum number of K at the top center of the plot
-num_K = df_q.shape[1] - 2  # Subtract 2 to exclude 'Pop_Label' and 'assignment'
-ax.text(0.5, 1.15, f'K={num_K}', ha='center', va='center', fontsize=12, transform=ax.transAxes)
+# Add a black line on Y-axis
+ax.axvline(x=-0.5, color='black', linewidth=0.5)
+
+# Display the value of K at the top of the plot
+K = df_q.shape[1] - 2  # Subtracting 2 to exclude 'Pop_Label' and 'assignment'
+ax.text(0.5, 1.1, f'K = {K}', ha='center', va='center', fontsize=14, transform=ax.transAxes)
 
 # Save the plot
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
