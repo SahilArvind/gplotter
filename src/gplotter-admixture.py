@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
 
 # Argument parser
 parser = argparse.ArgumentParser(description='Generate admixture plots.')
@@ -89,15 +90,16 @@ for pop_label, center_index in pop_label_positions.items():
 for boundary in pop_label_boundaries:
     ax.vlines(x=boundary, ymin=0, ymax=1, color='black', linewidth=0.5)
 
-# Add a black line on Y-axis at x = -0.5 with the calculated height
-ax.axvline(x=-0.5, ymin=0, ymax=0.95121, color='black', linewidth=0.5)
-
 # Display the value of K at the top of the plot
 K = df_q.shape[1] - 2  # Subtracting 2 to exclude 'Pop_Label' and 'assignment'
 ax.text(0.5, 1.1, f'K = {K}', ha='center', va='center', fontsize=14, transform=ax.transAxes)
 
-# Save the plot
+# Save the plot as PDF
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
+
+# Save the plot as PNG
+png_file_name = os.path.splitext(args.out_pdf)[0] + '.png'
+ax.figure.savefig(png_file_name, bbox_inches='tight', dpi=300)
 
 # Save the sorted Q dataframe
 df_q.to_csv(args.df_csv, sep=",", index=True, float_format='%.6f')
