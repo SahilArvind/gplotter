@@ -52,8 +52,7 @@ ax = df_q.plot.bar(stacked=True,
                    width=1,
                    color=pal,
                    fontsize='x-small',
-                   edgecolor='black',
-                   linewidth=0.5)
+                   edgecolor=None)  # Remove the default edgecolor
 
 # Clean up the plot
 ax.spines['top'].set_visible(False)
@@ -63,22 +62,36 @@ ax.set_xticks([])
 ax.set_xlabel('')
 ax.legend(bbox_to_anchor=(1, 1), fontsize='medium', labelspacing=0.5, frameon=False)
 
+# Set Y-axis scale
+ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
+
 # Ensure that df_q is sorted based on the order of df_fam
 df_fam_sorted = df_fam.set_index(1).loc[df_q.index].reset_index()
 
 # Calculate the position for each population label
 pop_labels = df_fam_sorted[0].unique()
 pop_label_positions = {}
+pop_label_boundaries = []
 for pop_label in pop_labels:
-    first_index = df_fam_sorted[df_fam_sorted[0] == pop_label].index[0]
-    pop_label_positions[pop_label] = first_index
+    indices = df_fam_sorted[df_fam_sorted[0] == pop_label].index
+    center_index = (indices[0] + indices[-1]) / 2
+    pop_label_positions[pop_label] = center_index
+    pop_label_boundaries.append(indices[-1] + 0.5)
 
 # Adjust plot margins to make space for the labels
-plt.subplots_adjust(bottom=0.2)
+plt.subplots_adjust(bottom=0.2, top=0.85)
 
-# Place population labels below the first bar of the sample ID for each pop label
-for pop_label, first_index in pop_label_positions.items():
-    ax.text(first_index, -0.05, pop_label, ha='center', va='top', fontsize=8, rotation=90, transform=ax.get_xaxis_transform())
+# Place population labels below the center of the group of bars for each pop label
+for pop_label, center_index in pop_label_positions.items():
+    ax.text(center_index, -0.05, pop_label, ha='center', va='top', fontsize=6, rotation=90, transform=ax.get_xaxis_transform())
+
+# Add black lines between different population labels
+for boundary in pop_label_boundaries:
+    ax.axvline(x=boundary, color='black', linewidth=0.5)
+
+# Add the maximum number of K at the top center of the plot
+num_K = df_q.shape[1] - 2  # Subtract 2 to exclude 'Pop_Label' and 'assignment'
+ax.text(0.5, 1.15, f'K={num_K}', ha='center', va='center', fontsize=12, transform=ax.transAxes)
 
 # Save the plot
 ax.figure.savefig(args.out_pdf, bbox_inches='tight')
