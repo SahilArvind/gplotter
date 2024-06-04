@@ -44,7 +44,7 @@ else:
     df_q['assignment'] = df_q.drop(['Pop_Label'], axis=1).idxmax(axis=1)
 
 # Set the color palette
-pal = sns.color_palette(['#ef8a62', '#92c5de', '#fddbc7', '#0571b0', '#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850', '#a6bddb', '#3690c0', '#02818a', '#016c59', '#8c510a'])
+pal = sns.color_palette(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#1b9e77', '#e7298a', '#66a61e', '#e6ab02', '#a6761d'])
 
 # Create the stacked bar plot
 ax = df_q.plot.bar(stacked=True,
@@ -89,8 +89,8 @@ for pop_label, center_index in pop_label_positions.items():
 for boundary in pop_label_boundaries:
     ax.vlines(x=boundary, ymin=0, ymax=1, color='black', linewidth=0.5)
 
-# Add a black line on Y-axis
-ax.axvline(x=-0.5, color='black', linewidth=0.5)
+# Add a black line on Y-axis at x = -0.5 with the calculated height
+ax.axvline(x=-0.5, ymin=0, ymax=0.95121, color='black', linewidth=0.5)
 
 # Display the value of K at the top of the plot
 K = df_q.shape[1] - 2  # Subtracting 2 to exclude 'Pop_Label' and 'assignment'
