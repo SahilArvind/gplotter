@@ -63,8 +63,9 @@ ax.set_xticks([])
 ax.set_xlabel('')
 ax.legend(bbox_to_anchor=(1, 1), fontsize='medium', labelspacing=0.5, frameon=False)
 
-# Set Y-axis scale
+# Set Y-axis scale and limits
 ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
+ax.set_ylim(0, 1)
 
 # Ensure that df_q is sorted based on the order of df_fam
 df_fam_sorted = df_fam.set_index(1).loc[df_q.index].reset_index()
